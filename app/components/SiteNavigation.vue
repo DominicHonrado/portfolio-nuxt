@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import { Award, House, Mail, UserRound, Wrench } from '@lucide/vue'
+
 const route = useRoute()
 const isMenuOpen = ref(false)
 
 const links = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Skills', to: '/skills' },
-  { label: 'Certifications', to: '/certifications' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Home', to: '/', icon: House },
+  { label: 'About', to: '/about', icon: UserRound },
+  { label: 'Skills', to: '/skills', icon: Wrench },
+  { label: 'Certifications', to: '/certifications', icon: Award },
+  { label: 'Contact', to: '/contact', icon: Mail },
 ]
 
 watch(() => route.fullPath, () => {
@@ -17,7 +19,7 @@ watch(() => route.fullPath, () => {
 
 <template>
   <header class="fixed top-0 z-10 w-full border-b border-white/10 bg-slate-950/90 backdrop-blur-sm">
-    <nav class="mx-auto max-w-6xl px-6 py-4">
+    <nav class="navbar mx-auto max-w-6xl px-6 py-4">
       <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div class="flex w-full items-center justify-between sm:w-auto">
           <NuxtLink to="/" class="text-xl font-bold">Dominic Honrado</NuxtLink>
@@ -43,13 +45,14 @@ watch(() => route.fullPath, () => {
             v-for="(link, index) in links"
             :key="link.to"
             :to="link.to"
-            class="block text-slate-300 transition"
+            class="inline-flex items-center gap-2 text-slate-300 transition"
             :class="[
               index < links.length - 1 ? 'pb-2' : '',
               route.path === link.to ? 'font-semibold text-white' : 'hover:text-white',
             ]"
             :aria-current="route.path === link.to ? 'page' : undefined"
           >
+            <component :is="link.icon" :size="18" aria-hidden="true" />
             {{ link.label }}
           </NuxtLink>
         </div>

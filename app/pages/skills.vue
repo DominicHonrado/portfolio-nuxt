@@ -1,5 +1,12 @@
 <script setup lang="ts">
-useHead({ title: 'Technical Skills | Dominic Austin Honrado' })
+useHead({
+  title: 'Technical Skills | Dominic Austin Honrado',
+})
+useSeoMeta({
+  description: 'Explore Dominic Austin Honrado’s programming languages, development tools, and technical skills.',
+  ogTitle: 'Technical Skills | Dominic Austin Honrado',
+  ogDescription: 'Programming languages and tools used by Dominic Austin Honrado.',
+})
 useReveal()
 
 const languages = [
@@ -20,45 +27,42 @@ const tools = [
 </script>
 
 <template>
-  <div>
-    <SiteNavigation />
+  <PageLayout>
     <main class="mx-auto max-w-4xl px-6 pt-24 pb-8">
-      <div class="mb-8 text-center">
-        <h1 class="mb-4 text-4xl font-bold sm:text-5xl">Technical Skills</h1>
-        <p class="text-lg text-slate-300 sm:text-xl">Here are the languages and tools I'm proficient in.</p>
-      </div>
+      <PageHeading
+        title="Technical Skills"
+        description="Here are the languages and tools I'm proficient in."
+      />
 
       <div class="space-y-6">
-        <section class="reveal translate-y-6 rounded-3xl border border-white/10 bg-slate-900/70 p-6 opacity-0 shadow-2xl transition-all duration-700 ease-out">
-          <h2 class="mb-4 text-2xl font-semibold text-sky-400">Programming Languages</h2>
+        <ContentSection title="Programming Languages">
           <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
             <div
               v-for="skill in languages"
               :key="skill.name"
-              class="reveal translate-y-6 rounded-2xl border border-white/10 bg-slate-900/75 p-4 text-center opacity-0 shadow-xl transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-105 hover:bg-slate-900/90 hover:shadow-2xl"
+              class="card reveal translate-y-6 rounded-2xl border border-white/10 bg-slate-900/75 p-4 text-center opacity-0 shadow-xl transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-105 hover:bg-slate-900/90 hover:shadow-2xl"
             >
               <img :src="`/images/Icons/${skill.icon}`" :alt="skill.alt" class="mx-auto mb-3 h-16 w-20 object-contain">
               <h3 class="text-lg font-semibold">{{ skill.name }}</h3>
               <p class="text-sm text-slate-400">{{ skill.description }}</p>
             </div>
           </div>
-        </section>
+        </ContentSection>
 
-        <section class="reveal translate-y-6 rounded-3xl border border-white/10 bg-slate-900/70 p-6 opacity-0 shadow-2xl transition-all duration-700 ease-out">
-          <h2 class="mb-4 text-2xl font-semibold text-emerald-400">Programming Tools</h2>
+        <ContentSection title="Programming Tools" accent="emerald">
           <div class="grid grid-cols-2 gap-4 sm:grid-cols-2">
             <div
               v-for="tool in tools"
               :key="tool.name"
-              class="reveal translate-y-6 rounded-2xl border border-white/10 bg-slate-900/75 p-4 text-center opacity-0 shadow-xl transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-105 hover:bg-slate-900/90 hover:shadow-2xl"
+              class="card reveal translate-y-6 rounded-2xl border border-white/10 bg-slate-900/75 p-4 text-center opacity-0 shadow-xl transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-105 hover:bg-slate-900/90 hover:shadow-2xl"
             >
               <img :src="`/images/Icons/${tool.icon}`" :alt="tool.alt" class="mx-auto mb-3 h-16 w-20 object-contain">
               <h3 class="text-lg font-semibold">{{ tool.name }}</h3>
               <p class="text-sm text-slate-400">{{ tool.description }}</p>
             </div>
           </div>
-        </section>
+        </ContentSection>
       </div>
     </main>
-  </div>
+  </PageLayout>
 </template>

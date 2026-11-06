@@ -1,5 +1,14 @@
 <script setup lang="ts">
-useHead({ title: 'Certifications | Dominic Austin Honrado' })
+import { ArrowUpRight, Expand, X } from '@lucide/vue'
+
+useHead({
+  title: 'Certifications | Dominic Austin Honrado',
+})
+useSeoMeta({
+  description: 'View Dominic Austin Honrado’s verified Java, Microsoft Word, and Microsoft PowerPoint certifications.',
+  ogTitle: 'Certifications | Dominic Austin Honrado',
+  ogDescription: 'Explore verified technical and Microsoft Office certifications earned by Dominic Austin Honrado.',
+})
 useReveal()
 
 const certificates = [
@@ -50,17 +59,15 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div>
-    <SiteNavigation />
+  <PageLayout>
     <main class="mx-auto max-w-4xl px-6 pt-24 pb-8">
-      <div class="mb-8 text-center">
-        <h1 class="mb-4 text-4xl font-bold sm:text-5xl">Certifications</h1>
-        <p class="text-lg text-slate-300 sm:text-xl">Here are the certifications I have obtained.</p>
-      </div>
+      <PageHeading
+        title="Certifications"
+        description="Here are the certifications I have obtained."
+      />
 
       <div class="space-y-6">
-        <section class="reveal translate-y-6 rounded-3xl border border-white/10 bg-slate-900/70 p-6 opacity-0 shadow-2xl transition-all duration-700 ease-out">
-          <h2 class="mb-4 text-2xl font-semibold text-sky-400">Verified Skills</h2>
+        <ContentSection title="Verified Skills">
           <p class="mb-6 text-slate-300">
             These certificates demonstrate the training and knowledge I've earned across programming, productivity, and presentation tools.
           </p>
@@ -70,28 +77,30 @@ onBeforeUnmount(() => {
               :key="certificate.title"
               class="reveal flex h-full translate-y-6 flex-col rounded-2xl border border-white/10 bg-slate-900/75 p-4 text-center opacity-0 shadow-xl transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-105 hover:bg-slate-900/90 hover:shadow-2xl"
             >
-              <img
-                :src="certificate.image"
-                :alt="certificate.alt"
-                class="mx-auto mb-3 h-auto w-auto cursor-pointer rounded-lg"
-                role="button"
-                tabindex="0"
+              <button
+                type="button"
+                class="btn btn-ghost group relative mx-auto mb-3 h-auto w-auto p-0"
+                :aria-label="`Preview ${certificate.title}`"
                 @click="selectedCertificate = certificate"
-                @keydown.enter="selectedCertificate = certificate"
-                @keydown.space.prevent="selectedCertificate = certificate"
               >
+                <img :src="certificate.image" :alt="certificate.alt" class="rounded-lg">
+                <span class="absolute bottom-2 right-2 rounded-full bg-slate-950/90 p-2 text-white opacity-0 transition group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <Expand :size="18" aria-hidden="true" />
+                </span>
+              </button>
               <h3 class="mb-4 text-lg font-semibold">{{ certificate.title }}</h3>
               <a
                 :href="certificate.url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="mt-auto inline-block rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700"
+                class="btn btn-success mt-auto text-sm font-medium text-white"
               >
                 View Official Certificate
+                <ArrowUpRight :size="16" aria-hidden="true" />
               </a>
             </div>
           </div>
-        </section>
+        </ContentSection>
       </div>
     </main>
 
@@ -108,11 +117,11 @@ onBeforeUnmount(() => {
           <h2 class="text-2xl font-semibold text-white">{{ selectedCertificate.title }}</h2>
           <button
             type="button"
-            class="text-2xl text-slate-400 transition hover:text-white"
+            class="btn btn-circle btn-ghost text-slate-400 transition hover:text-white"
             aria-label="Close certificate"
             @click="closeModal"
           >
-            &times;
+            <X :size="20" aria-hidden="true" />
           </button>
         </div>
         <div class="p-6">
@@ -127,16 +136,18 @@ onBeforeUnmount(() => {
               :href="selectedCertificate.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-block rounded-lg bg-emerald-600 px-6 py-2 font-medium text-white transition hover:bg-emerald-700"
+              class="btn btn-success font-medium text-white"
             >
               View Official Certificate
+              <ArrowUpRight :size="16" aria-hidden="true" />
             </a>
-            <button type="button" class="rounded-lg bg-slate-700 px-6 py-2 font-medium text-white transition hover:bg-slate-600" @click="closeModal">
+            <button type="button" class="btn btn-ghost font-medium text-white" @click="closeModal">
+              <X :size="16" aria-hidden="true" />
               Close
             </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </PageLayout>
 </template>
